@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.what.eat.dao.mapper.FoodListMapper">
+  <resultMap id="BaseResultMap" type="com.what.eat.domain.entity.FoodListEntity">
+    <id column="food_id" jdbcType="BIGINT" property="foodId" />
+    <result column="food_name" jdbcType="VARCHAR" property="foodName" />
+    <result column="food_type" jdbcType="VARCHAR" property="foodType" />
+    <result column="food_num" jdbcType="INTEGER" property="foodNum" />
+    <result column="crowd" jdbcType="VARCHAR" property="crowd" />
+    <result column="season" jdbcType="VARCHAR" property="season" />
+    <result column="place_to_eat" jdbcType="VARCHAR" property="placeToEat" />
+    <result column="time_to_eat" jdbcType="VARCHAR" property="timeToEat" />
+    <result column="belief_to_eat" jdbcType="VARCHAR" property="beliefToEat" />
+    <result column="taste" jdbcType="VARCHAR" property="taste" />
+    <result column="food_price" jdbcType="VARCHAR" property="foodPrice" />
+    <result column="food_link" jdbcType="VARCHAR" property="foodLink" />
+    <result column="take_out_food" jdbcType="VARCHAR" property="takeOutFood" />
+    <result column="one_people_choose" jdbcType="BIGINT" property="onePeopleChoose" />
+    <result column="more_people_choose" jdbcType="BIGINT" property="morePeopleChoose" />
+    <result column="spring_people_choose" jdbcType="BIGINT" property="springPeopleChoose" />
+    <result column="summer_people_choose" jdbcType="BIGINT" property="summerPeopleChoose" />
+    <result column="autumn_people_choose" jdbcType="BIGINT" property="autumnPeopleChoose" />
+    <result column="winter_people_choose" jdbcType="BIGINT" property="winterPeopleChoose" />
+    <result column="north_people_choose" jdbcType="BIGINT" property="northPeopleChoose" />
+    <result column="south_people_choose" jdbcType="BIGINT" property="southPeopleChoose" />
+    <result column="morning_people_choose" jdbcType="BIGINT" property="morningPeopleChoose" />
+    <result column="noon_people_choose" jdbcType="BIGINT" property="noonPeopleChoose" />
+    <result column="dinner_people_choose" jdbcType="BIGINT" property="dinnerPeopleChoose" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    food_id, food_name, food_type, food_num, crowd, season, place_to_eat, time_to_eat, 
+    belief_to_eat, taste, food_price, food_link, take_out_food, one_people_choose, more_people_choose, 
+    spring_people_choose, summer_people_choose, autumn_people_choose, winter_people_choose, 
+    north_people_choose, south_people_choose, morning_people_choose, noon_people_choose, 
+    dinner_people_choose
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from food_list
+    where food_id = #{foodId,jdbcType=BIGINT}
+  </select>
+  <select id="selectExceptTasteAndBeliefWithNum"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from food_list
+    where taste not in (#{taste}) and belief_to_eat not in (#{beliefToEat}) and food_num = #{foodNum};
+  </select>
+
+  <select id="selectExceptTasteAndBelief"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from food_list
+    where taste not in (#{taste}) and belief_to_eat not in (#{beliefToEat});
+  </select>
+
+
+  <insert id="insert" parameterType="com.what.eat.domain.entity.FoodListEntity">
+    insert into food_list (food_id, food_name, food_type, 
+      food_num, crowd, season, 
+      place_to_eat, time_to_eat, belief_to_eat, 
+      taste, food_price, food_link, 
+      take_out_food, one_people_choose, more_people_choose, 
+      spring_people_choose, summer_people_choose, autumn_people_choose, 
+      winter_people_choose, north_people_choose, south_people_choose, 
+      morning_people_choose, noon_people_choose, dinner_people_choose
+      )
+    values (#{foodId,jdbcType=BIGINT}, #{foodName,jdbcType=VARCHAR}, #{foodType,jdbcType=VARCHAR}, 
+      #{foodNum,jdbcType=INTEGER}, #{crowd,jdbcType=VARCHAR}, #{season,jdbcType=VARCHAR}, 
+      #{placeToEat,jdbcType=VARCHAR}, #{timeToEat,jdbcType=VARCHAR}, #{beliefToEat,jdbcType=VARCHAR}, 
+      #{taste,jdbcType=VARCHAR}, #{foodPrice,jdbcType=VARCHAR}, #{foodLink,jdbcType=VARCHAR}, 
+      #{takeOutFood,jdbcType=VARCHAR}, #{onePeopleChoose,jdbcType=BIGINT}, #{morePeopleChoose,jdbcType=BIGINT}, 
+      #{springPeopleChoose,jdbcType=BIGINT}, #{summerPeopleChoose,jdbcType=BIGINT}, #{autumnPeopleChoose,jdbcType=BIGINT}, 
+      #{winterPeopleChoose,jdbcType=BIGINT}, #{northPeopleChoose,jdbcType=BIGINT}, #{southPeopleChoose,jdbcType=BIGINT}, 
+      #{morningPeopleChoose,jdbcType=BIGINT}, #{noonPeopleChoose,jdbcType=BIGINT}, #{dinnerPeopleChoose,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.what.eat.domain.entity.FoodListEntity">
+    insert into food_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="foodId != null">
+        food_id,
+      </if>
+      <if test="foodName != null">
+        food_name,
+      </if>
+      <if test="foodType != null">
+        food_type,
+      </if>
+      <if test="foodNum != null">
+        food_num,
+      </if>
+      <if test="crowd != null">
+        crowd,
+      </if>
+      <if test="season != null">
+        season,
+      </if>
+      <if test="placeToEat != null">
+        place_to_eat,
+      </if>
+      <if test="timeToEat != null">
+        time_to_eat,
+      </if>
+      <if test="beliefToEat != null">
+        belief_to_eat,
+      </if>
+      <if test="taste != null">
+        taste,
+      </if>
+      <if test="foodPrice != null">
+        food_price,
+      </if>
+      <if test="foodLink != null">
+        food_link,
+      </if>
+      <if test="takeOutFood != null">
+        take_out_food,
+      </if>
+      <if test="onePeopleChoose != null">
+        one_people_choose,
+      </if>
+      <if test="morePeopleChoose != null">
+        more_people_choose,
+      </if>
+      <if test="springPeopleChoose != null">
+        spring_people_choose,
+      </if>
+      <if test="summerPeopleChoose != null">
+        summer_people_choose,
+      </if>
+      <if test="autumnPeopleChoose != null">
+        autumn_people_choose,
+      </if>
+      <if test="winterPeopleChoose != null">
+        winter_people_choose,
+      </if>
+      <if test="northPeopleChoose != null">
+        north_people_choose,
+      </if>
+      <if test="southPeopleChoose != null">
+        south_people_choose,
+      </if>
+      <if test="morningPeopleChoose != null">
+        morning_people_choose,
+      </if>
+      <if test="noonPeopleChoose != null">
+        noon_people_choose,
+      </if>
+      <if test="dinnerPeopleChoose != null">
+        dinner_people_choose,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="foodId != null">
+        #{foodId,jdbcType=BIGINT},
+      </if>
+      <if test="foodName != null">
+        #{foodName,jdbcType=VARCHAR},
+      </if>
+      <if test="foodType != null">
+        #{foodType,jdbcType=VARCHAR},
+      </if>
+      <if test="foodNum != null">
+        #{foodNum,jdbcType=INTEGER},
+      </if>
+      <if test="crowd != null">
+        #{crowd,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null">
+        #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="placeToEat != null">
+        #{placeToEat,jdbcType=VARCHAR},
+      </if>
+      <if test="timeToEat != null">
+        #{timeToEat,jdbcType=VARCHAR},
+      </if>
+      <if test="beliefToEat != null">
+        #{beliefToEat,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        #{taste,jdbcType=VARCHAR},
+      </if>
+      <if test="foodPrice != null">
+        #{foodPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="foodLink != null">
+        #{foodLink,jdbcType=VARCHAR},
+      </if>
+      <if test="takeOutFood != null">
+        #{takeOutFood,jdbcType=VARCHAR},
+      </if>
+      <if test="onePeopleChoose != null">
+        #{onePeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="morePeopleChoose != null">
+        #{morePeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="springPeopleChoose != null">
+        #{springPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="summerPeopleChoose != null">
+        #{summerPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="autumnPeopleChoose != null">
+        #{autumnPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="winterPeopleChoose != null">
+        #{winterPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="northPeopleChoose != null">
+        #{northPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="southPeopleChoose != null">
+        #{southPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="morningPeopleChoose != null">
+        #{morningPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="noonPeopleChoose != null">
+        #{noonPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="dinnerPeopleChoose != null">
+        #{dinnerPeopleChoose,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.what.eat.domain.entity.FoodListEntity">
+    update food_list
+    <set>
+      <if test="foodName != null">
+        food_name = #{foodName,jdbcType=VARCHAR},
+      </if>
+      <if test="foodType != null">
+        food_type = #{foodType,jdbcType=VARCHAR},
+      </if>
+      <if test="foodNum != null">
+        food_num = #{foodNum,jdbcType=INTEGER},
+      </if>
+      <if test="crowd != null">
+        crowd = #{crowd,jdbcType=VARCHAR},
+      </if>
+      <if test="season != null">
+        season = #{season,jdbcType=VARCHAR},
+      </if>
+      <if test="placeToEat != null">
+        place_to_eat = #{placeToEat,jdbcType=VARCHAR},
+      </if>
+      <if test="timeToEat != null">
+        time_to_eat = #{timeToEat,jdbcType=VARCHAR},
+      </if>
+      <if test="beliefToEat != null">
+        belief_to_eat = #{beliefToEat,jdbcType=VARCHAR},
+      </if>
+      <if test="taste != null">
+        taste = #{taste,jdbcType=VARCHAR},
+      </if>
+      <if test="foodPrice != null">
+        food_price = #{foodPrice,jdbcType=VARCHAR},
+      </if>
+      <if test="foodLink != null">
+        food_link = #{foodLink,jdbcType=VARCHAR},
+      </if>
+      <if test="takeOutFood != null">
+        take_out_food = #{takeOutFood,jdbcType=VARCHAR},
+      </if>
+      <if test="onePeopleChoose != null">
+        one_people_choose = #{onePeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="morePeopleChoose != null">
+        more_people_choose = #{morePeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="springPeopleChoose != null">
+        spring_people_choose = #{springPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="summerPeopleChoose != null">
+        summer_people_choose = #{summerPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="autumnPeopleChoose != null">
+        autumn_people_choose = #{autumnPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="winterPeopleChoose != null">
+        winter_people_choose = #{winterPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="northPeopleChoose != null">
+        north_people_choose = #{northPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="southPeopleChoose != null">
+        south_people_choose = #{southPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="morningPeopleChoose != null">
+        morning_people_choose = #{morningPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="noonPeopleChoose != null">
+        noon_people_choose = #{noonPeopleChoose,jdbcType=BIGINT},
+      </if>
+      <if test="dinnerPeopleChoose != null">
+        dinner_people_choose = #{dinnerPeopleChoose,jdbcType=BIGINT},
+      </if>
+    </set>
+    where food_id = #{foodId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.what.eat.domain.entity.FoodListEntity">
+    update food_list
+    set food_name = #{foodName,jdbcType=VARCHAR},
+      food_type = #{foodType,jdbcType=VARCHAR},
+      food_num = #{foodNum,jdbcType=INTEGER},
+      crowd = #{crowd,jdbcType=VARCHAR},
+      season = #{season,jdbcType=VARCHAR},
+      place_to_eat = #{placeToEat,jdbcType=VARCHAR},
+      time_to_eat = #{timeToEat,jdbcType=VARCHAR},
+      belief_to_eat = #{beliefToEat,jdbcType=VARCHAR},
+      taste = #{taste,jdbcType=VARCHAR},
+      food_price = #{foodPrice,jdbcType=VARCHAR},
+      food_link = #{foodLink,jdbcType=VARCHAR},
+      take_out_food = #{takeOutFood,jdbcType=VARCHAR},
+      one_people_choose = #{onePeopleChoose,jdbcType=BIGINT},
+      more_people_choose = #{morePeopleChoose,jdbcType=BIGINT},
+      spring_people_choose = #{springPeopleChoose,jdbcType=BIGINT},
+      summer_people_choose = #{summerPeopleChoose,jdbcType=BIGINT},
+      autumn_people_choose = #{autumnPeopleChoose,jdbcType=BIGINT},
+      winter_people_choose = #{winterPeopleChoose,jdbcType=BIGINT},
+      north_people_choose = #{northPeopleChoose,jdbcType=BIGINT},
+      south_people_choose = #{southPeopleChoose,jdbcType=BIGINT},
+      morning_people_choose = #{morningPeopleChoose,jdbcType=BIGINT},
+      noon_people_choose = #{noonPeopleChoose,jdbcType=BIGINT},
+      dinner_people_choose = #{dinnerPeopleChoose,jdbcType=BIGINT}
+    where food_id = #{foodId,jdbcType=BIGINT}
+  </update>
+</mapper>

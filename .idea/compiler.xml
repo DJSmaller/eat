@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="eat-common" />
+        <module name="eat-dao" />
+        <module name="eat-domain" />
+        <module name="eat-service" />
+        <module name="eat-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="eat" target="1.8" />
+      <module name="eat-common" target="1.8" />
+      <module name="eat-dao" target="1.8" />
+      <module name="eat-domain" target="1.8" />
+      <module name="eat-service" target="1.8" />
+      <module name="eat-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/eat.iml" filepath="$PROJECT_DIR$/.idea/eat.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eat-common/eat-common.iml" filepath="$PROJECT_DIR$/eat-common/eat-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eat-dao/eat-dao.iml" filepath="$PROJECT_DIR$/eat-dao/eat-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eat-domain/eat-domain.iml" filepath="$PROJECT_DIR$/eat-domain/eat-domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eat-service/eat-service.iml" filepath="$PROJECT_DIR$/eat-service/eat-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eat-web/eat-web.iml" filepath="$PROJECT_DIR$/eat-web/eat-web.iml" />
+    </modules>
+  </component>
+</project>
